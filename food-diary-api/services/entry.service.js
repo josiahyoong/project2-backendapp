@@ -17,7 +17,26 @@ const list = async () => {
     }
 }
 
+const remove = async (id) => {
+    try {
+        // Use Mongoose's deleteOne to remove the entry with the given ID
+        const result = await Entry.deleteOne({ _id: id });
+
+        // Check if the operation was successful
+        // if (result.deletedCount === 1) {
+        //     // Entry was successfully removed
+        //     return true;
+        // } else {
+        //     // Entry with the given ID not found
+        //     return false;
+        // }
+    } catch (e) {
+        throw e;
+    }
+}
+
 module.exports = {
     create,
-    list
+    list,
+    remove
 }

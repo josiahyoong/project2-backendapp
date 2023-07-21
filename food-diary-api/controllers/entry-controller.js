@@ -1,6 +1,6 @@
 const {v4: uuidv4} = require("uuid");
 const httpStatus = require("http-status");
-const {create: createEntry, list: listEntry} = require("../services/entry.service"); // Add this line
+const {create: createEntry, list: listEntry, remove: removeID} = require("../services/entry.service"); // Add this line
 const data = [];
 
 // Refactor the `create` function
@@ -26,7 +26,21 @@ const readAll = async (req, res) => {
     
 }
 
-// There should be other functions below but we will skip it for now.
+// Pseudo code for delete
+const remove = async (req, res) => {
+    // call delete function from entry.service.js
+    // refer to the readAll function in this file
+    try{
+        const ID = req.params.id
+        const data = await removeID(ID);
+        // return data.length > 0 ? res.json(data) : res.sendStatus(httpStatus.NOT_FOUND);
+    }catch(e){
+        console.log("Failed to list entries", e);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+}
+// Use the `removeID` function as a callback for removing an entry
 
 
 
@@ -50,6 +64,7 @@ const readAll = async (req, res) => {
 
 module.exports = {
     create,
-    readAll
+    readAll,
+    remove
 }
 

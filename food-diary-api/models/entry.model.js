@@ -1,25 +1,30 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
 const EntrySchema = new Schema(
     {
-        summary: {
+        currentDate: {
+            type: Date,
+            required: true
+        },
+
+        meal: {
             type: String,
             required: true
+        },
+
+        food: {
+            type: String,
+            required: false
+        },
+
+        time_24H: {
+            type: String,
+            required: false
         }
-        // currentDate: {
-        //     type: Date,
-        //     required: true
-        // },
-        // activity: {
-        //     type: String,
-        //     required: true
-        // },
-        // intensityRating: {
-        //     type: Number,
-        //     required: false
-        // }
+
     }
 );
 
